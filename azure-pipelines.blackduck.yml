@@ -13,9 +13,9 @@ resources:
 
 steps:
   - checkout: azure-flutter-tasks
-  - task: Npm@1
-    inputs:
-      command: 'install'
+  # - task: Npm@1
+  #   inputs:
+  #     command: 'install'
   - task: Bash@3
     displayName: BlackDuck Detect Scan Step
     inputs:
