@@ -1,3 +1,8 @@
+parameters:
+  - name: blackDuckApiToken
+    type: string
+    default: ""
+
 trigger:
 - main
 
@@ -19,15 +24,15 @@ steps:
       targetType: "inline"
       script: |
         bash <(curl -s https://detect.synopsys.com/detect9.sh) \
-        --blackduck.api.token=$(BLACK-DUCK-TOKEN) \
+        --blackduck.api.token=${{ parameters.blackDuckApiToken }} \
         --blackduck.url='https://genetec.blackducksoftware.com/' \
-        --detect.blackduck.scan.mode=INTELLIGENT \
-        --detect.bom.aggregate.name=BDIOAggregateName \
+        --detect.blackduck.scan.mode=RAPID \
         --detect.code.location.name="AutoVu.Mobile-$(Build.Repository.Name)" \
         --detect.detector.search.continue=true \
         --detect.detector.search.depth=5 \
         --detect.project.group.name="AutoVu.Mobile" \
-        --detect.project.name="AutoVu.Mobile azure-flutter-tasks" \
+        --detect.project.name="AutoVu.Mobile-azure-flutter-tasks" \
+        --detect.project.version.distribution=SAAS \
         --detect.project.version.name=1 \
         --detect.project.version.notes="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)" \
         --detect.project.version.update=true \
