@@ -13,29 +13,16 @@ resources:
 
 steps:
   - checkout: azure-flutter-tasks
-  # - task: Npm@1
-  #   inputs:
-  #     command: 'install'
-  - task: Bash@3
-    displayName: BlackDuck Detect Scan Step
+  - task: SynopsysDetectTask@9
+    displayName: 'BlackDuck Detect Scan'
     inputs:
-      targetType: "inline"
-      script: |
-        bash <(curl -s https://detect.synopsys.com/detect9.sh) \
-        --blackduck.api.token=$(BLACK-DUCK-TOKEN) \
-        --blackduck.url='https://genetec.blackducksoftware.com/' \
-        --detect.blackduck.scan.mode=INTELLIGENT \
-        --detect.bom.aggregate.name=BDIOAggregateName \
-        --detect.code.location.name="AutoVu.Mobile-$(Build.Repository.Name)" \
-        --detect.detector.search.continue=true \
-        --detect.detector.search.depth=5 \
-        --detect.project.group.name="AutoVu.Mobile" \
-        --detect.project.name="Flutter Tasks" \
-        --detect.project.version.distribution=SAAS \
-        --detect.project.version.name=1 \
-        --detect.project.version.update=true \
-        --detect.source.path=$(Build.Repository.LocalPath) \
-        --detect.output.path=$(Build.ArtifactStagingDirectory)/blackduck \
-        --detect.wait.for.results=true \
-        --detect.cleanup=false \
-        --logging.level.detect=INFO
+      BlackDuckService: 'BlackDuck'
+      DetectVersion: 'latest'
+      DetectFolder: 'c:\BlackDuck'
+      DetectArguments: |
+        --detect.project.name=azure-flutter-tasks
+        --detect.detector.search.continue=true
+        --detect.detector.search.depth=$(BlackDuck.SearchDepth) 
+        --detect.bom.aggregate.name=BDIOAggregateName
+        --detect.project.version.notes="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)"
+        --detect.project.version.update=true
