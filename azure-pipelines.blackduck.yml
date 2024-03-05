@@ -19,14 +19,14 @@ resources:
 steps:
   - checkout: azure-flutter-tasks
   
-  - script: |
-      sudo snap install flutter --classic
-    displayName: 'Install Flutter'
+  # - script: |
+  #     sudo snap install flutter --classic
+  #   displayName: 'Install Flutter'
 
-  - script: |
-      flutter pub get
-      flutter build apk
-    displayName: 'Build Android'
+  # - script: |
+  #     flutter pub get
+  #     flutter build apk
+  #   displayName: 'Build Android'
 
   - task: Bash@3
     displayName: BlackDuck Detect Scan Step
@@ -46,7 +46,7 @@ steps:
         --detect.project.version.name=1 \
         --detect.project.version.notes="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)" \
         --detect.project.version.update=true \
-        --detect.source.path=$(Build.Repository.LocalPath) \
+        --detect.source.path=$(Build.Repository.LocalPath)/tasks \
         --detect.output.path=$(Build.ArtifactStagingDirectory)/blackduck \
         --detect.wait.for.results=true \
         --detect.cleanup=false \
