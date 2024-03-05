@@ -18,15 +18,6 @@ resources:
 
 steps:
   - checkout: azure-flutter-tasks
-  
-  # - script: |
-  #     sudo snap install flutter --classic
-  #   displayName: 'Install Flutter'
-
-  # - script: |
-  #     flutter pub get
-  #     flutter build apk
-  #   displayName: 'Build Android'
 
   - task: Bash@3
     displayName: BlackDuck Detect Scan Step
@@ -40,7 +31,7 @@ steps:
         --detect.code.location.name="AutoVu.Mobile-$(Build.Repository.Name)" \
         --detect.detector.search.continue=true \
         --detect.detector.search.depth=5 \
-        --detect.project.group.name="AutoVu.Mobile" \
+        --detect.project.group.name="AutoVu" \
         --detect.project.name="AutoVu.Mobile-azure-flutter-tasks" \
         --detect.project.version.distribution=SAAS \
         --detect.project.version.name=1 \
