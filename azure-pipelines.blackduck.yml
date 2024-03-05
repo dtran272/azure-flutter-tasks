@@ -23,15 +23,13 @@ steps:
         --blackduck.url='https://genetec.blackducksoftware.com/' \
         --detect.blackduck.scan.mode=INTELLIGENT \
         --detect.bom.aggregate.name=BDIOAggregateName \
-        --detect.code.location.name="ClearID-$(Build.Repository.Name)" \
+        --detect.code.location.name="AutoVu.Mobile-$(Build.Repository.Name)" \
         --detect.detector.search.continue=true \
         --detect.detector.search.depth=5 \
-        --detect.project.group.name="ClearID" \
-        --detect.project.name="ClearID-AdvancedInstallerExtension" \
-        --detect.project.version.distribution=SAAS \
+        --detect.project.group.name="AutoVu.Mobile" \
+        --detect.project.name="AutoVu.Mobile azure-flutter-tasks" \
         --detect.project.version.name=1 \
         --detect.project.version.notes="$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)" \
-        --detect.project.version.phase=RELEASED \
         --detect.project.version.update=true \
         --detect.source.path=$(Build.Repository.LocalPath) \
         --detect.output.path=$(Build.ArtifactStagingDirectory)/blackduck \
