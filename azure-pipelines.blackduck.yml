@@ -18,6 +18,20 @@ resources:
 
 steps:
   - checkout: azure-flutter-tasks
+  
+  - script: |
+      sudo apt update
+      sudo apt install -y git
+      git clone -b stable https://github.com/flutter/flutter.git $HOME/flutter
+      export PATH="$HOME/flutter/bin:$PATH"
+      flutter precache
+    displayName: 'Install Flutter'
+
+  - script: |
+      flutter pub get
+      flutter build apk
+    displayName: 'Build Android'
+
   - task: Bash@3
     displayName: BlackDuck Detect Scan Step
     inputs:
