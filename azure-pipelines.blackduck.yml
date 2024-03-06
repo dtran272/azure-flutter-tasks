@@ -27,7 +27,7 @@ steps:
         bash <(curl -s https://detect.synopsys.com/detect9.sh) \
         --blackduck.api.token=${{ parameters.blackDuckApiToken }} \
         --blackduck.url='https://genetec.blackducksoftware.com/' \
-        --detect.blackduck.scan.mode=RAPID \
+        --detect.blackduck.scan.mode=INTELLIGENT \
         --detect.code.location.name="AutoVu.Mobile-$(Build.Repository.Name)" \
         --detect.detector.search.continue=true \
         --detect.detector.search.depth=5 \
